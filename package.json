@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "db:studio": "npx drizzle-kit studio",
+    "db:push": "npx drizzle-kit push"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.32.0",
@@ -15,6 +17,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "dotenv": "^17.2.2",
     "drizzle-orm": "^0.44.5",
     "lucide-react": "^0.544.0",
     "next": "15.5.3",
