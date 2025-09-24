@@ -10,6 +10,8 @@ import {
   UserButton,
 } from '@clerk/nextjs'
 
+import { Toaster } from "@/components/ui/sonner"
+
 const nunito = Nunito({
   subsets: ["latin"],
 });
@@ -30,6 +32,7 @@ export default function RootLayout({
         <body suppressHydrationWarning
           className={`${nunito.className} antialiased`}
         >
+          <Toaster />
           {children}
         </body>
       </html>
