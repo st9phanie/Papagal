@@ -2,13 +2,15 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { InfinityIcon } from "lucide-react";
+import { courses } from "@/db/schema";
 
 type Props = {
-    activeCourse: { imageSrc: string, title: string };
+    activeCourse: typeof courses.$inferSelect; //for drizzle
     hearts: number;
     points: number;
     hasActiveSub: boolean;
 }
+
 const UserProgress = ({ activeCourse, hearts, points, hasActiveSub }: Props) => {
     return (
         <div className="flex items-center justify-between gap-x-2 w-full">
