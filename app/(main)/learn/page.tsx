@@ -3,18 +3,21 @@ import { StickyWrapper } from '@/components/sticky-wrapper'
 import React from 'react'
 import Header from './header'
 import UserProgress from '@/components/user-progress'
-import { getUnits, getUserProgress } from '@/db/queries'
+import { getCourseProgress, getLessonPercentage, getUnits, getUserProgress } from '@/db/queries'
 import { redirect } from 'next/navigation'
+import Unit from './unit'
 
 const LearnPage = async () => {
     const userProgressData = getUserProgress();
+    const courseProgressData = getCourseProgress();
+    const lessonPercentageData = getLessonPercentage();
     const unitsData = getUnits();
 
-    const [userProgress, units,] = await Promise.all([
-        userProgressData, unitsData
+    const [userProgress, units, courseProgress, lessonPercentage] = await Promise.all([
+        userProgressData, unitsData, courseProgressData, lessonPercentageData
     ])
 
-    if (!userProgress || !userProgress.activeCourse) {
+    if (!userProgress || !userProgress.activeCourse || !courseProgress) {
         redirect("/courses")
     }
 
@@ -25,9 +28,10 @@ const LearnPage = async () => {
             </StickyWrapper>
             <FeedWrapper>
                 <Header title={userProgress.activeCourse.title} />
-                {units.map((unit)=> (
+                {units.map((unit) => (
                     <div key={unit.id} className='mb-10'>
-                        {JSON.stringify(unit)}
+                        <Unit id={unit.id} order={unit.order} description={unit.description} lessons={unit.lessons} title={unit.title} activeLesson={courseProgress?.activeLesson} activeLessonPercentage={lessonPercentage}
+                        />
                     </div>
                 ))}
             </FeedWrapper>
