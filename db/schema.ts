@@ -55,6 +55,7 @@ export const challenges = pgTable("challenges", {
     type: challengesEnum("type").notNull(),
     question: text("question").notNull(),
     order: integer("order").notNull(),
+    audioSrc:text("audioSrc"),
 });
 
 export const challengesRelations = relations(challenges, ({ one, many }) => ({
